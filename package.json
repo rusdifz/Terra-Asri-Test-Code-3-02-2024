@@ -9,7 +9,9 @@
   "author": "rusdi98",
   "license": "ISC",
   "dependencies": {
+    "emojibase": "^15.3.0",
     "emojibase-data": "^15.3.0",
+    "emoticon-parser": "^0.0.1",
     "express": "^4.18.2"
   }
 }

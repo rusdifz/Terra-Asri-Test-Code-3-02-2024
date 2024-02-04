@@ -3,7 +3,7 @@ const { calculate_diagonal_sum } = require("./Case 1: Unearthing the Philosopher
 const { find_common_slot } = require("./Case 2: ️ The Time Wizard's Gambit")
 const { isCircularPalindrome } = require("./Case 3:  The Never ending Palindrome Quest")
 const { setDataSelfNumber } = require("./Case 4: Unveiling the Secrets of Self-Numbers")
-
+const { emojiToTextWithMapping } = require("./Case 5:  Decrypting the Emoji Code")
 const app = express();
 const PORT = 4000
 
@@ -27,7 +27,7 @@ app.get('/case_1', async (req,res)=>{
 
 app.post('/case_2', async (req,res)=>{
 
-  const meetings = req.body.meetings ? '' : res.status(400).send({
+  const meetings = req.body.meetings ? req.body.meetings : res.status(400).send({
     data: null, 
     error: "meetings must be exist"
   }) 
@@ -73,10 +73,22 @@ app.get('/case_4', async (req,res)=>{
 
 })
 
+app.post('/case_5', async (req,res)=>{
+
+  const texts = req.body.text ? req.body.text : res.status(400).send({
+    data: null, 
+    error: "text must be exist"
+  }) 
+
+  const textmapping = emojiToTextWithMapping(texts)
+  
+  res.status(200).send({
+    data: textmapping, 
+    error: null
+  })
+  
+})
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
-
-//curl --location 'http://localhost:4000/case_1?grid_size=5' \
-//curl --location 'http://localhost:4000/case_3?word=A man, a plan, a canal. Panama \
-//curl --location 'http://localhost:4000/case_4?limit=500' \
